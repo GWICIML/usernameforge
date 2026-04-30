@@ -30,6 +30,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 22px;
 }
 
 .nav-links {
@@ -38,6 +44,18 @@ header {
   font-size: 14px;
   color: #CBD5E1;
   flex-wrap: wrap;
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+  box-shadow: none;
 }
 
 .page { display: none; }
@@ -118,6 +136,48 @@ footer {
   background: #020617;
   color: #94A3B8;
 }
+
+@media (max-width: 700px) {
+  header {
+    padding: 16px;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background: #020617;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 14px;
+    flex-direction: column;
+    width: 180px;
+    text-align: right;
+    z-index: 30;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hero {
+    padding: 55px 20px 35px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+    line-height: 1.15;
+  }
+
+  .generator {
+    max-width: 92%;
+  }
+}
 </style>
 </head>
 
@@ -125,15 +185,18 @@ footer {
 
 <header>
   <div class="nav">
-    <strong>UsernameForge</strong>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#youtube">YouTube</a>
-      <a href="#tiktok">TikTok</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#business">Business</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <strong class="logo">UsernameForge</strong>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#youtube" onclick="closeMenu()">YouTube</a>
+      <a href="#tiktok" onclick="closeMenu()">TikTok</a>
+      <a href="#instagram" onclick="closeMenu()">Instagram</a>
+      <a href="#business" onclick="closeMenu()">Business</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
     </div>
   </div>
 </header>
@@ -201,6 +264,14 @@ UsernameForge
 </footer>
 
 <script>
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+function closeMenu() {
+  document.getElementById("navLinks").classList.remove("open");
+}
+
 function generatorHTML() {
   return `
     <div class="generator">
@@ -230,6 +301,7 @@ function showPage() {
   const hash = window.location.hash.replace("#","") || "home";
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   document.getElementById(hash)?.classList.add("active");
+  closeMenu();
 }
 
 window.addEventListener("hashchange", showPage);
