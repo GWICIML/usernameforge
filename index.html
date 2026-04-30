@@ -251,7 +251,7 @@ function generate(btn) {
   let names = [...brandCores];
 
   if (platform === "youtube") {
-    const endings = ["Studio", "Media"];
+    const endings = ["Studio", "Media", "Network"];
     names = brandCores.map(n => {
       const formatted = n.charAt(0).toUpperCase() + n.slice(1);
       return formatted + " " + endings[Math.floor(Math.random() * endings.length)];
@@ -279,6 +279,7 @@ function generate(btn) {
 
     if (clean.includes("studio")) s += 3;
     if (clean.includes("media")) s += 2;
+    if (clean.includes("network")) s += 1;
 
     if (clean.includes("labs")) s -= 5;
     if (clean.includes("channel")) s -= 5;
