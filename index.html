@@ -100,6 +100,12 @@ button {
   font-size: 18px;
 }
 
+.helper {
+  font-size: 13px;
+  color: #64748B;
+  margin-top: 12px;
+}
+
 section {
   max-width: 900px;
   margin: auto;
@@ -137,7 +143,7 @@ footer {
 <div id="home" class="page active">
   <div class="hero">
     <h1>Find a username that actually sounds like a brand</h1>
-    <p>Generate clean, memorable names in seconds</p>
+    <p>Generate clean, memorable names in seconds.</p>
     <div class="generator-slot"></div>
   </div>
 </div>
@@ -145,6 +151,7 @@ footer {
 <div id="youtube" class="page">
   <div class="hero">
     <h1>YouTube Name Generator</h1>
+    <p>Create channel names that sound clean, serious, and brandable.</p>
     <div class="generator-slot"></div>
   </div>
 </div>
@@ -152,6 +159,7 @@ footer {
 <div id="tiktok" class="page">
   <div class="hero">
     <h1>TikTok Username Generator</h1>
+    <p>Create short, catchy usernames built for fast attention.</p>
     <div class="generator-slot"></div>
   </div>
 </div>
@@ -159,6 +167,7 @@ footer {
 <div id="instagram" class="page">
   <div class="hero">
     <h1>Instagram Username Generator</h1>
+    <p>Create clean handles for personal brands, creators, and niche pages.</p>
     <div class="generator-slot"></div>
   </div>
 </div>
@@ -166,14 +175,15 @@ footer {
 <div id="business" class="page">
   <div class="hero">
     <h1>Business Name Generator</h1>
+    <p>Create professional name ideas for brands, startups, and agencies.</p>
     <div class="generator-slot"></div>
   </div>
 </div>
 
 <div id="about" class="page">
   <section>
-    <h2>About</h2>
-    <p>This tool helps you generate clean brandable names fast.</p>
+    <h2>About UsernameForge</h2>
+    <p>UsernameForge helps creators, brands, and businesses generate clean, brandable names fast.</p>
   </section>
 </div>
 
@@ -206,6 +216,8 @@ function generatorHTML() {
       <button onclick="generate(this)">Generate</button>
 
       <div class="results"></div>
+
+      <p class="helper">Good names get taken fast. Save one you like.</p>
     </div>
   `;
 }
@@ -239,26 +251,40 @@ function generate(btn) {
   let names = [...brandCores];
 
   if (platform === "youtube") {
-    const endings = ["Studio","Media","Channel","TV","Labs"];
-    names = brandCores.map(n => 
-      n.charAt(0).toUpperCase() + n.slice(1) + " " + endings[Math.floor(Math.random()*endings.length)]
-    );
+    const endings = ["Studio", "Media"];
+    names = brandCores.map(n => {
+      const formatted = n.charAt(0).toUpperCase() + n.slice(1);
+      return formatted + " " + endings[Math.floor(Math.random() * endings.length)];
+    });
   }
 
   if (platform === "business") {
-    const endings = ["Group","Labs","Studio","Digital"];
-    names = brandCores.map(n => 
-      n.charAt(0).toUpperCase() + n.slice(1) + " " + endings[Math.floor(Math.random()*endings.length)]
-    );
+    const endings = ["Group", "Labs", "Studio", "Digital", "Works"];
+    names = brandCores.map(n => {
+      const formatted = n.charAt(0).toUpperCase() + n.slice(1);
+      return formatted + " " + endings[Math.floor(Math.random() * endings.length)];
+    });
   }
 
   function score(n) {
+    let clean = n.toLowerCase();
     let s = 0;
-    s += (12 - n.length);
-    if (n.includes("x")) s += 4;
-    if (n.includes("z")) s += 4;
-    if (n.includes("v")) s += 3;
-    if (n.includes("ex") || n.includes("ix")) s += 4;
+
+    s += (16 - clean.length);
+
+    if (clean.includes("x")) s += 4;
+    if (clean.includes("z")) s += 4;
+    if (clean.includes("v")) s += 3;
+    if (clean.includes("ex") || clean.includes("ix")) s += 4;
+
+    if (clean.includes("studio")) s += 3;
+    if (clean.includes("media")) s += 2;
+
+    if (clean.includes("labs")) s -= 5;
+    if (clean.includes("channel")) s -= 5;
+    if (clean.includes("group")) s -= 5;
+    if (clean.includes("digital")) s -= 5;
+
     return s;
   }
 
