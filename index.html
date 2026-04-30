@@ -1,503 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UsernameForge | Free Username Generator</title>
-  <meta name="description" content="Generate clean, brandable usernames for YouTube, TikTok, Instagram, business, gaming, and more." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UsernameForge</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0F172A;
+  color: white;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0F172A;
-      color: #ffffff;
-      line-height: 1.6;
-    }
+header {
+  background: #020617;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+.nav {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    header {
-      background: #020617;
-      padding: 16px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+.nav a {
+  margin-left: 12px;
+  font-size: 14px;
+}
 
-    .nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
+.hero {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
 
-    .logo {
-      font-weight: 800;
-      font-size: 22px;
-    }
+.hero h1 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
 
-    .nav-links {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      font-size: 14px;
-    }
+.hero p {
+  color: #94A3B8;
+  max-width: 600px;
+  margin: auto;
+}
 
-    .hero {
-      padding: 70px 20px 40px;
-      text-align: center;
-      background: radial-gradient(circle at top, #1E293B, #0F172A 65%);
-    }
+.generator {
+  background: white;
+  color: black;
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 16px;
+}
 
-    .hero h1 {
-      font-size: 42px;
-      margin: 0 0 14px;
-    }
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+}
 
-    .hero p {
-      max-width: 720px;
-      margin: 0 auto 24px;
-      color: #CBD5E1;
-      font-size: 18px;
-    }
+button {
+  width: 100%;
+  padding: 12px;
+  background: #6366F1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-    .generator-card {
-      max-width: 520px;
-      margin: 30px auto 0;
-      background: #ffffff;
-      color: #111827;
-      padding: 24px;
-      border-radius: 18px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    }
+.result {
+  background: #f1f5f9;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
 
-    select, input {
-      width: 100%;
-      padding: 13px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid #CBD5E1;
-      font-size: 16px;
-    }
+.winner {
+  border: 3px solid #6366F1;
+  background: #EEF2FF;
+  font-weight: 800;
+  font-size: 18px;
+  transform: scale(1.03);
+}
 
-    button {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 999px;
-      background: #6366F1;
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      cursor: pointer;
-    }
+section {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
 
-    button:hover {
-      background: #4F46E5;
-    }
-
-    #results {
-      margin-top: 18px;
-    }
-
-    .result {
-      background: #F8FAFC;
-      color: #111827;
-      padding: 12px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      border: 1px solid #E5E7EB;
-      font-weight: 600;
-    }
-
-    .winner {
-      border: 2px solid #6366F1;
-      background: #EEF2FF;
-      font-weight: 800;
-    }
-
-    .trust-strip {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-      color: #CBD5E1;
-      font-size: 14px;
-    }
-
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 50px 20px;
-    }
-
-    .section-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 28px;
-      margin-bottom: 26px;
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: 28px;
-    }
-
-    .muted {
-      color: #CBD5E1;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
-    }
-
-    .example-card {
-      background: #ffffff;
-      color: #111827;
-      padding: 18px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-    }
-
-    .example-card strong {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 6px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    footer {
-      background: #020617;
-      padding: 30px 20px;
-      text-align: center;
-      color: #CBD5E1;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      padding: 13px;
-      border-radius: 10px;
-      border: 1px solid #CBD5E1;
-      font-size: 16px;
-    }
-
-    .contact-card {
-      background: white;
-      color: #111827;
-      padding: 24px;
-      border-radius: 18px;
-    }
-
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav-links {
-        gap: 10px;
-      }
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 30px;
+  background: #020617;
+  color: #94A3B8;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="nav">
-    <div class="logo">UsernameForge</div>
-    <div class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#youtube">YouTube</a>
-      <a href="#tiktok">TikTok</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#business">Business</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+    <strong>UsernameForge</strong>
+    <div>
+      <a href="#">Home</a>
+      <a href="#">YouTube</a>
+      <a href="#">TikTok</a>
+      <a href="#">Instagram</a>
+      <a href="#">Business</a>
     </div>
   </div>
 </header>
 
-<main>
+<div class="hero">
+  <h1>Find a username that actually sounds like a brand</h1>
+  <p>Generate clean, memorable names for YouTube, TikTok, Instagram, and business projects in seconds.</p>
+</div>
 
-  <div id="home" class="page active">
-    <div class="hero">
-      <h1>Free Username Generator for Every Platform</h1>
-      <p>Find clean, brandable usernames for YouTube, TikTok, Instagram, business ideas, and more.</p>
-      <div id="generator"></div>
-    </div>
+<div class="generator">
+  <select id="platform">
+    <option value="youtube">YouTube</option>
+    <option value="tiktok">TikTok</option>
+    <option value="instagram">Instagram</option>
+    <option value="business">Business</option>
+  </select>
 
-    <section>
-      <div class="section-card">
-        <h2>Why Your Username Matters</h2>
-        <p class="muted">A strong username helps people remember you, recognize your brand, and take your content more seriously.</p>
-        <ul>
-          <li>Creates a stronger first impression</li>
-          <li>Makes your profile easier to remember</li>
-          <li>Helps your name look more professional</li>
-        </ul>
-      </div>
+  <input id="input" placeholder="Enter a keyword, example: luxury">
 
-      <div class="section-card">
-        <h2>Popular Examples</h2>
-        <div class="grid">
-          <div class="example-card"><strong>Velix</strong><span>Short and brandable</span></div>
-          <div class="example-card"><strong>Novex</strong><span>Modern creator name</span></div>
-          <div class="example-card"><strong>Zentro</strong><span>Clean business feel</span></div>
-          <div class="example-card"><strong>Vexon</strong><span>Strong and memorable</span></div>
-        </div>
-      </div>
-    </section>
-  </div>
+  <button onclick="generate()">Generate Names</button>
 
-  <div id="youtube" class="page">
-    <div class="hero">
-      <h1>YouTube Username Generator</h1>
-      <p>Create YouTube channel names that look clean, brandable, and easy to remember.</p>
-      <div class="generator-slot"></div>
-    </div>
+  <p style="font-size:13px; color:#64748B;">
+    Try different keywords to discover better names
+  </p>
 
-    <section>
-      <div class="section-card">
-        <h2>Why Your YouTube Name Matters</h2>
-        <p class="muted">Your channel name is part of your first impression. A strong name can make your channel look more serious before anyone watches a video.</p>
-        <ul>
-          <li>Helps your channel look more professional</li>
-          <li>Makes your name easier to remember</li>
-          <li>Supports stronger branding over time</li>
-        </ul>
-      </div>
+  <div id="results"></div>
 
-      <div class="section-card">
-        <h2>Tips for Creating a Great YouTube Name</h2>
-        <ul>
-          <li>Keep it short and easy to say</li>
-          <li>Avoid random numbers and clutter</li>
-          <li>Choose something that can grow with your channel</li>
-          <li>Say it out loud before using it</li>
-        </ul>
-      </div>
-    </section>
-  </div>
+  <p style="font-size:13px; color:#64748B;">
+    Good names get taken fast. Save one you like.
+  </p>
+</div>
 
-  <div id="tiktok" class="page">
-    <div class="hero">
-      <h1>TikTok Username Generator</h1>
-      <p>Generate short, catchy TikTok names that are easy to remember and share.</p>
-      <div class="generator-slot"></div>
-    </div>
+<section>
+  <h2>Why Your Username Matters</h2>
+  <p>Your name is your first impression. A clean name makes you look more serious and easier to remember.</p>
+</section>
 
-    <section>
-      <div class="section-card">
-        <h2>Why Your TikTok Username Matters</h2>
-        <p class="muted">On TikTok, people scroll fast. A simple, catchy name helps your profile stick.</p>
-        <ul>
-          <li>Improves memorability</li>
-          <li>Looks cleaner in comments and shares</li>
-          <li>Helps build a stronger creator identity</li>
-        </ul>
-      </div>
-    </section>
-  </div>
-
-  <div id="instagram" class="page">
-    <div class="hero">
-      <h1>Instagram Username Generator</h1>
-      <p>Create clean Instagram names for personal brands, creators, and niche pages.</p>
-      <div class="generator-slot"></div>
-    </div>
-
-    <section>
-      <div class="section-card">
-        <h2>Why Your Instagram Name Matters</h2>
-        <p class="muted">A clean Instagram handle makes your profile easier to find, remember, and share.</p>
-        <ul>
-          <li>Improves profile recognition</li>
-          <li>Looks better on posts and reels</li>
-          <li>Supports a more polished brand</li>
-        </ul>
-      </div>
-    </section>
-  </div>
-
-  <div id="business" class="page">
-    <div class="hero">
-      <h1>Business Name Generator</h1>
-      <p>Generate professional name ideas for brands, startups, agencies, and online businesses.</p>
-      <div class="generator-slot"></div>
-    </div>
-
-    <section>
-      <div class="section-card">
-        <h2>Why Business Names Matter</h2>
-        <p class="muted">A business name should sound credible, memorable, and scalable. Weak names make brands look smaller than they are.</p>
-        <ul>
-          <li>Builds trust faster</li>
-          <li>Makes your brand easier to remember</li>
-          <li>Helps you look more established</li>
-        </ul>
-      </div>
-    </section>
-  </div>
-
-  <div id="about" class="page">
-    <section>
-      <div class="section-card">
-        <h1>About UsernameForge</h1>
-        <p>UsernameForge is a simple tool built to help creators, brands, and businesses generate clean, memorable username ideas.</p>
-        <p>Whether you are starting a YouTube channel, launching a TikTok profile, building an Instagram page, or naming a business, your name matters.</p>
-        <p>Our goal is simple: give you fast, useful name ideas without requiring signup or wasting your time.</p>
-      </div>
-    </section>
-  </div>
-
-  <div id="contact" class="page">
-    <section>
-      <div class="contact-card">
-        <h1>Contact UsernameForge</h1>
-        <p>If you have questions, feedback, or partnership inquiries, reach out anytime.</p>
-        <p><strong>Email:</strong> support.usernameforge@gmail.com</p>
-
-        <input placeholder="Your name" />
-        <input placeholder="Your email" />
-        <textarea placeholder="Your message"></textarea>
-        <button>Send Message</button>
-      </div>
-    </section>
-  </div>
-
-  <div id="privacy" class="page">
-    <section>
-      <div class="section-card">
-        <h1>Privacy Policy</h1>
-        <p>UsernameForge respects your privacy. We do not collect personal information unless you choose to provide it through contact forms or direct communication.</p>
-        <p>We may use basic analytics to understand site usage and improve the website. We do not sell personal information.</p>
-        <p>Questions can be sent to support.usernameforge@gmail.com.</p>
-      </div>
-    </section>
-  </div>
-
-  <div id="terms" class="page">
-    <section>
-      <div class="section-card">
-        <h1>Terms of Service</h1>
-        <p>By using UsernameForge, you agree to use the site for lawful purposes only.</p>
-        <p>Generated names are provided for inspiration. We do not guarantee availability, uniqueness, or trademark safety.</p>
-        <p>You are responsible for checking availability before using any generated name.</p>
-      </div>
-    </section>
-  </div>
-
-  <div id="disclaimer" class="page">
-    <section>
-      <div class="section-card">
-        <h1>Disclaimer</h1>
-        <p>Username ideas generated by UsernameForge are for inspiration only.</p>
-        <p>We do not guarantee that any name is available, unique, or free of trademark restrictions.</p>
-      </div>
-    </section>
-  </div>
-
-</main>
+<section>
+  <h2>Examples</h2>
+  <p>Velix, Novex, Zentro, Vexon</p>
+</section>
 
 <footer>
-  <div class="footer-links">
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="#privacy">Privacy Policy</a>
-    <a href="#terms">Terms of Service</a>
-    <a href="#disclaimer">Disclaimer</a>
-  </div>
-  <div>UsernameForge</div>
+  UsernameForge
 </footer>
 
 <script>
-function buildGenerator(defaultPlatform = "youtube") {
-  return `
-    <div class="generator-card">
-      <select id="platform">
-        <option value="youtube">YouTube</option>
-        <option value="tiktok">TikTok</option>
-        <option value="instagram">Instagram</option>
-        <option value="business">Business</option>
-      </select>
-
-      <input id="input" placeholder="Enter a keyword, example: luxury" />
-
-      <button onclick="generate()">Generate Names</button>
-
-      <div id="results"></div>
-    </div>
-
-    <div class="trust-strip">
-      <span>No signup required</span>
-      <span>Instant results</span>
-      <span>100% free</span>
-    </div>
-  `;
-}
-
-function placeGenerator() {
-  const mainGenerator = document.getElementById("generator");
-  if (mainGenerator) mainGenerator.innerHTML = buildGenerator();
-
-  document.querySelectorAll(".generator-slot").forEach(slot => {
-    slot.innerHTML = buildGenerator();
-  });
-}
-
-function showPage() {
-  const hash = window.location.hash.replace("#", "") || "home";
-  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-  const selected = document.getElementById(hash);
-  if (selected) selected.classList.add("active");
-  window.scrollTo(0, 0);
-}
-
 function generate() {
-  const activePage = document.querySelector(".page.active");
-  const resultsDiv = activePage.querySelector("#results");
-  const platform = activePage.querySelector("#platform").value;
+  const resultsDiv = document.getElementById("results");
+  const platform = document.getElementById("platform").value;
+
+  resultsDiv.innerHTML = "Generating...";
 
   const brandCores = [
     "zentro","velix","oriva","nexa","vanta",
@@ -513,57 +182,39 @@ function generate() {
 
   if (platform === "business") {
     names = brandCores.map(n => {
-      const formatted = n.charAt(0).toUpperCase() + n.slice(1);
-      const endings = ["Labs", "Group", "Studio", "Digital", "Works"];
-      return formatted + " " + endings[Math.floor(Math.random() * endings.length)];
+      let endings = ["Group","Labs","Studio","Digital"];
+      return n.charAt(0).toUpperCase() + n.slice(1) + " " + endings[Math.floor(Math.random()*endings.length)];
     });
   }
 
-  if (platform === "tiktok" || platform === "instagram") {
-    names = brandCores;
-  }
-
   function score(name) {
-    const clean = name.toLowerCase();
     let s = 0;
-
-    s += (16 - clean.length);
-
-    if (clean.endsWith("x")) s += 8;
-    if (clean.endsWith("o")) s += 5;
-    if (clean.endsWith("a")) s += 4;
-
-    if (clean.includes("x")) s += 4;
-    if (clean.includes("z")) s += 4;
-    if (clean.includes("v")) s += 3;
-
-    if (clean.includes("ex") || clean.includes("ix")) s += 4;
-
+    s += (12 - name.length);
+    if (name.includes("x")) s += 4;
+    if (name.includes("z")) s += 4;
+    if (name.includes("v")) s += 3;
+    if (name.includes("ex") || name.includes("ix")) s += 4;
     return s;
   }
 
   let shuffled = names.sort(() => 0.5 - Math.random());
-  let winner = shuffled.sort((a, b) => score(b) - score(a))[0];
+  let winner = shuffled.sort((a,b) => score(b) - score(a))[0];
   let others = shuffled.filter(n => n !== winner).slice(0, 9);
 
   resultsDiv.innerHTML = "";
 
-  const winnerDiv = document.createElement("div");
-  winnerDiv.className = "result winner";
-  winnerDiv.innerText = winner + " ⭐";
-  resultsDiv.appendChild(winnerDiv);
+  const w = document.createElement("div");
+  w.className = "result winner";
+  w.innerText = winner + " ⭐";
+  resultsDiv.appendChild(w);
 
-  others.forEach(name => {
-    const div = document.createElement("div");
-    div.className = "result";
-    div.innerText = name;
-    resultsDiv.appendChild(div);
+  others.forEach(n => {
+    let d = document.createElement("div");
+    d.className = "result";
+    d.innerText = n;
+    resultsDiv.appendChild(d);
   });
 }
-
-placeGenerator();
-showPage();
-window.addEventListener("hashchange", showPage);
 </script>
 
 </body>
