@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Username Generator</title>
+
+  <style>
+    body {
+      background: #0F172A;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      padding-top: 50px;
+    }
+
+    .container {
+      width: 320px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: #6366F1;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #results {
+      margin-top: 20px;
+    }
+
+    .result {
+      background: white;
+      color: black;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Username Generator</h1>
+
+  <input id="input" placeholder="Enter a keyword (e.g. luxury)" />
+
+  <button onclick="generate()">Generate</button>
+
+  <div id="results"></div>
+</div>
+
+<script>
+function generate() {
+  const resultsDiv = document.getElementById("results");
+
+  const brandCores = [
+    "zentro","velix","oriva","nexa","vanta",
+    "zora","velar","orix","zenva","novex",
+    "zento","orion","velto","nexar","vexon"
+  ];
+
+  let shuffled = brandCores.sort(() => 0.5 - Math.random());
+
+  function score(name) {
+    let s = 0;
+
+    s += (12 - name.length);
+
+    if (name.endsWith("x")) s += 8;
+    if (name.endsWith("o")) s += 5;
+    if (name.endsWith("a")) s += 4;
+
+    if (name.includes("x")) s += 4;
+    if (name.includes("z")) s += 4;
+    if (name.includes("v")) s += 3;
+
+    if (name.includes("ex") || name.includes("ix")) s += 4;
+
+    if (name.endsWith("ar")) s -= 2;
+    if (name.endsWith("va")) s -= 2;
+
+    return s;
+  }
+
+  let winner = shuffled.sort((a, b) => score(b) - score(a))[0];
+  let others = shuffled.filter(n => n !== winner).slice(0, 9);
+
+  resultsDiv.innerHTML = "";
+
+  const winnerDiv = document.createElement("div");
+  winnerDiv.className = "result";
+  winnerDiv.style.border = "2px solid #6366F1";
+  winnerDiv.style.fontWeight = "bold";
+  winnerDiv.innerText = winner + " ⭐";
+  resultsDiv.appendChild(winnerDiv);
+
+  others.forEach(name => {
+    const div = document.createElement("div");
+    div.className = "result";
+    div.innerText = name;
+    resultsDiv.appendChild(div);
+  });
+}
+</script>
+
+</body>
+</html>
